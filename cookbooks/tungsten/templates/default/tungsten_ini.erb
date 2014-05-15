@@ -1,0 +1,37 @@
+#
+# Copyright 2014 Continuent Inc.
+#
+[defaults]
+user=<%= node[:tungsten][:systemUser] -%>
+
+home-directory=<%= node[:tungsten][:homeDir] -%>
+
+mysql-connectorj-path=<%= node[:tungsten][:mysqljLocation] -%>
+
+datasource-user=<%= node[:tungsten][:repUser] -%>
+
+datasource-password=<%= node[:tungsten][:repPassword] -%>
+
+datasource-port=<%= node[:tungsten][:repPort] -%>
+
+application-port=<%= node[:tungsten][:appPort] -%>
+
+application-user=<%= node[:tungsten][:appUser] -%>
+
+application-password=<%= node[:tungsten][:appPassword] -%>
+
+skip-validation-check=MySQLPermissionsCheck
+#skip-validation-check=ManagerWitnessNeededCheck
+start-and-report=true
+
+[defaults.replicator]
+home-directory=/opt/replicator
+rmi-port=10002
+
+[<%= node[:tungsten][:serviceName] -%>]
+master=<%= node[:tungsten][:master] -%>
+
+members=<%= node[:tungsten][:members] -%>
+
+connectors=<%= node[:tungsten][:connectors] -%>
+
