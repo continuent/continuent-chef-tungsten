@@ -23,10 +23,6 @@ node[:tungsten][:prereqPackages].each do |pkg|
   end
 end
 
-execute "setRubyVersion" do
-	command "alternatives --set ruby /usr/bin/ruby1.8"
-end
-
 if node[:tungsten][:installJava] == true
 	package "java" do
 		action :install
