@@ -27,7 +27,7 @@ template "/etc/tungsten/tungsten.ini" do
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{node[:tungsten][:clusterSoftware]}" do
-	source node[:tungsten][:clusterSoftwareSource]
+	source "#{node[:tungsten][:clusterSoftwareSource]}#{node[:tungsten][:clusterSoftware]}"
 	owner node[:tungsten][:systemUser]
 	group node[:tungsten][:systemUser]
 	mode 00644

@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-default[:tungsten][:clusterSoftware] = 'continuent-tungsten-2.0.2-460.noarch.rpm'
-default[:tungsten][:clusterSoftwareSource] = 'https://s3.amazonaws.com/releases.continuent.com/ct-2.0.4/continuent-tungsten-2.0.5-3.noarch.rpm'
+default[:tungsten][:clusterSoftware] = 'continuent-tungsten-2.0.5-3.noarch.rpm'
+default[:tungsten][:clusterSoftwareSource] = 'https://s3.amazonaws.com/releases.continuent.com/ct-2.0.4/'
 default[:tungsten][:clusterSoftwareChecksum] = 'b8ea78762f66a9c9b8ca7e884ae310083981f1fb'
 
 default[:tungsten][:prereqPackages] = [
