@@ -32,8 +32,7 @@ default[:tungsten][:prereqPackages] = [
 	'mysql'
 ]
 
-default[:tungsten][:clusterSoftwareDir] = default[:tungsten][:clusterSoftware]
-default[:tungsten][:clusterSoftwareDir].gsub!( /\.noarch\.rpm/, '' )
+default[:tungsten][:clusterSoftwareDir] = default[:tungsten][:clusterSoftware].gsub( /\.noarch\.rpm/, '' )
 
 default[:tungsten][:systemUser]	= 'tungsten'
 default[:tungsten][:mysqljLocation] = '/opt/mysql/mysql-connector-java-5.1.26-bin.jar'
