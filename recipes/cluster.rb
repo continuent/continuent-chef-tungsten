@@ -26,19 +26,20 @@ template "/etc/tungsten/tungsten.ini" do
 	source "tungsten_ini.erb"
 end
 
-cookbook_file "/tmp/#{node[:tungsten][:clusterSoftware]}" do
-	source node[:tungsten][:clusterSoftware]
+remote_file "#{Chef::Config[:file_cache_path]}/#{node[:tungsten][:clusterSoftware]}" do
+	source node[:tungsten][:clusterSoftwareSource]
 	owner node[:tungsten][:systemUser]
 	group node[:tungsten][:systemUser]
 	mode 00644
+  checksum node[:tungsten][:clusterSoftwareChecksum]
 	action :create_if_missing
 end
 
 package "TungstenClusterRPM" do
 	action :install
-	source "/tmp/#{node[:tungsten][:clusterSoftware]}"
+	source "#{Chef::Config[:file_cache_path]}/#{node[:tungsten][:clusterSoftware]}"
 	provider Chef::Provider::Package::Rpm
-	only_if { File.exists?("/tmp/#{node[:tungsten][:clusterSoftware]}") }
+	only_if { File.exists?("#{Chef::Config[:file_cache_path]}/#{node[:tungsten][:clusterSoftware]}") }
 end
 
 execute "installTungstenCluster" do
