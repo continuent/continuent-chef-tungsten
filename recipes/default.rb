@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 file "/tmp/tungsten_install.log" do
-  owner "ec2-user"
-  group "ec2-user"
+  owner "root"
+  group "root"
   mode 00644
   action :create
   content "
