@@ -7,6 +7,14 @@ template node[:tungsten][:mysqlConfigFile] do
   action :create
 end
 
+template "#{node[:tungsten][:rootHome]}/.my.cnf" do
+  mode 00600
+  source "tungsten_root_my_cnf.erb"
+  owner "root"
+  group "root"
+  action :create
+end
+
 template "/tmp/tungsten_create_mysql_users" do
   mode 00700
   source "tungsten_create_mysql_users.erb"
