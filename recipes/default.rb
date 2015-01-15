@@ -39,4 +39,5 @@ end
 
 include_recipe "tungsten::prereq"
 include_recipe "tungsten::mysql_server" if node[:tungsten][:installMysqlServer] == true
+include_recipe "tungsten::mysql_user"
 include_recipe "tungsten::cluster"
