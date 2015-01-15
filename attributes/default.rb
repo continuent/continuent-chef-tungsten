@@ -147,3 +147,7 @@ if node['platform'] == 'amazon'
 else
 	default['tungsten']['installNTP']	= true
 end
+
+include_attribute "java"
+default['java']['install_flavour'] = 'openjdk'
+default['java']['jdk_version'] = '7'

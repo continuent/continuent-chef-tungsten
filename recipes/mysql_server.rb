@@ -16,12 +16,11 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License.
 #
-unless node['platform'] =~ /(?i:centos|redhat|oel|amazon|debian|ubuntu)/
-	fail "The mysql_server recipe is not supported on an #{node['platform']}-based system."
-end
 
-package "mysql-server" do
-	action :install
+include_recipe "mysql::server"
+
+unless node['platform'] =~ /(?i:centos|redhat|oel|amazon|debian|ubuntu)/
+  fail "The mysql_server recipe is not supported on an #{node['platform']}-based system."
 end
 
 directory "/etc/mysql" do
