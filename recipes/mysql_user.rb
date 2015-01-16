@@ -15,7 +15,7 @@ template "#{node[:tungsten][:rootHome]}/.my.cnf" do
   action :create
 end
 
-template "/tmp/tungsten_create_mysql_users" do
+template "#{Chef::Config[:file_cache_path]}/tungsten_create_mysql_users.sh" do
   mode 00700
   source "tungsten_create_mysql_users.erb"
   owner "root"
@@ -25,8 +25,8 @@ template "/tmp/tungsten_create_mysql_users" do
 end
 
 execute "tungsten_create_mysql_users" do
-  command "/tmp/tungsten_create_mysql_users"
-  only_if { File.exists?("/tmp/tungsten_create_mysql_users") }
+  command "#{Chef::Config[:file_cache_path]}/tungsten_create_mysql_users.sh"
+  only_if { File.exists?("#{node[:tungsten][:rootHome]}/.my.cnf") }
 end
 
 execute "removeAnonUsers" do
