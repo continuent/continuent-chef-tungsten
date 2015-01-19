@@ -167,3 +167,8 @@ if node[:tungsten][:installSSHKeys] == true
 	end
 
 end
+
+# Define here so we can use it in any recipe we like
+service "mysqld" do
+  action :nothing
+end

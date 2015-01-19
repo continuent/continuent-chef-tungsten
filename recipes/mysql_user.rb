@@ -5,6 +5,7 @@ template node[:tungsten][:mysqlConfigFile] do
   owner "root"
   group "root"
   action :create
+  notifies :reload, "service[mysqld]", :immediately
 end
 
 template "#{node[:tungsten][:rootHome]}/.my.cnf" do
