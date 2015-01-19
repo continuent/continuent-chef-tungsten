@@ -17,6 +17,27 @@
 # limitations under the License.
 #
 
+file "/tmp/tungsten_install.log" do
+  owner "root"
+  group "root"
+  mode 00644
+  action :create
+  content "
+>> Variables
+    system_profile  = #{node[:system_profile]}
+    filesystem  = #{node[:filesystem]}
+    platform    = #{node[:platform]}
+    platform_family = #{node[:platform_family]}
+    os      = #{node[:os]}
+    os_version  = #{node[:os_version]}
+    ec2     = #{node[:ec2]}
+    installNTP  = #{node[:tungsten][:installNTP]}
+    setupSSHDirectory = #{node[:tungsten][:setupSSHDirectory]}
+    disableSELinux  = #{node[:tungsten][:disableSELinux]}
+    rootHome    = #{node[:tungsten][:rootHome]}
+"
+end
+
 node[:tungsten][:prereqPackages].each do |pkg|
   package pkg do
     action :install
