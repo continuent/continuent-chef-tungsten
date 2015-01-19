@@ -74,6 +74,7 @@ default[:tungsten][:mysqlAdminPassword] = 'secret'
 default[:tungsten][:rootHome] = File.expand_path('~root')
 
 default[:tungsten][:installMysqlServer] = true
+default[:tungsten][:installMysqlUser] = true
 default[:tungsten][:mysqlServerID] = 101
 default[:tungsten][:mysqlBinlogFormat] = 'ROW'
 default[:tungsten][:mysqlIncrement] = 10

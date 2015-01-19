@@ -17,3 +17,6 @@
 # limitations under the License.
 #
 
+
+include_recipe "tungsten::prereq"
+include_recipe "tungsten::cluster"
