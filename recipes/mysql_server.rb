@@ -50,7 +50,6 @@ group "mysql" do
 end
 
 execute "tungsten_set_mysql_admin_password" do
-  path ["/bin", "/usr/bin"]
   command "mysqladmin -u#{node[:tungsten][:mysqlAdminUser]} password #{node[:tungsten][:mysqlAdminPassword]}"
   only_if	{ "/usr/bin/test -f /usr/bin/mysql" && "/usr/bin/mysql -u {node[:tungsten][:mysqlAdminUser]}" }
 end
