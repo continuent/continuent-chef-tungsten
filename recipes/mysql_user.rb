@@ -1,12 +1,4 @@
 
-template node[:tungsten][:mysqlConfigFile] do
-  mode 00644
-  source "tungsten_my_cnf.erb"
-  owner "root"
-  group "root"
-  action :create
-  notifies :reload, "service[mysqld]", :immediately
-end
 
 template "#{node[:tungsten][:rootHome]}/.my.cnf" do
   mode 00600

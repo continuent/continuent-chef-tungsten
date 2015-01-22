@@ -38,9 +38,16 @@ directory "/etc/mysql/conf.d" do
   action :create
 end
 
+template node[:tungsten][:mysqlConfigFile] do
+  mode 00644
+  source "tungsten_my_cnf.erb"
+  owner "root"
+  group "root"
+  action :create
+end
+
 service "mysqld" do
 	action :start
-	only_if { File.exists?(node[:tungsten][:mysqlConfigFile]) }
 end
 
 group "mysql" do
