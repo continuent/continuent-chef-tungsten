@@ -8,12 +8,22 @@ template "#{node[:tungsten][:rootHome]}/.my.cnf" do
   action :create
 end
 
+require 'shellwords'
 template "#{Chef::Config[:file_cache_path]}/tungsten_create_mysql_users.sh" do
   mode 00700
   source "tungsten_create_mysql_users.erb"
   owner "root"
   group "root"
   action :create
+  variables({
+    :escaped => {
+      'repUser' => Shellwords.escape(node['tungsten']['repUser']),
+      'repPassword' => Shellwords.escape(node['tungsten']['repPassword']),
+      'appUser' => Shellwords.escape(node['tungsten']['appUser']),
+      'appPassword' => Shellwords.escape(node['tungsten']['appPassword'])
+    },
+    :rootHome => Shellwords.escape(node['tungsten']['rootHome'])
+  })
   only_if { File.exists?("#{node[:tungsten][:rootHome]}/.my.cnf") }
 end
 

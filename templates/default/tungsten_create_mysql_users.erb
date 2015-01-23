@@ -19,15 +19,15 @@
 # limitations under the License.
 #
 
-replication_user=<%= node[:tungsten][:repUser] -%>
+replication_user='<%= @escaped['repUser'] -%>'
 
-replication_password=<%= node[:tungsten][:repPassword] -%>
+replication_password='<%= @escaped['repPassword'] -%>'
 
-application_user=<%= node[:tungsten][:appUser] -%>
+application_user='<%= @escaped['appUser'] -%>'
 
-application_password=<%= node[:tungsten][:appPassword]  -%>
+application_password='<%= @escaped['appPassword']  -%>'
 
-root_home=<%= node[:tungsten][:rootHome] -%>
+root_home='<%= @rootHome -%>'
 
 if [ -f $root_home/.my.cnf ]
 then
