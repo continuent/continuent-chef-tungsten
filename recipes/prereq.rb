@@ -136,11 +136,8 @@ cookbook_file "mysql-connector-java-5.1.26-bin.jar" do
 	only_if { node[:tungsten][:installMysqlj] == true }
 end
 
-file "/selinux/enforcing" do
-	owner "root"
-	mode 00600
-	content "0"
-	only_if { node[:tungsten][:disableSELinux] == true }
+if node[:tungsten][:disableSELinux] then
+  include_recipe "selinux::permissive"
 end
 
 if node[:tungsten][:installSSHKeys] == true
