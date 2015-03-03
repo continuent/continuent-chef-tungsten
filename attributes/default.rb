@@ -39,6 +39,7 @@ default[:tungsten][:mysqljLocation] = '/opt/mysql/mysql-connector-java-5.1.26-bi
 default[:tungsten][:profileScript] = '~/.bash_profile'
 
 default[:tungsten][:homeDir] = '/opt/continuent'
+default[:tungsten][:backupDir] = '/opt/continuent/backups'
 default[:tungsten][:prereqDirectories] = [
 	"#{node[:tungsten][:homeDir]}",
 	"#{node[:tungsten][:homeDir]}/software",

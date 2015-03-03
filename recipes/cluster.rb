@@ -26,6 +26,14 @@ template "/etc/tungsten/tungsten.ini" do
 	source "tungsten_ini.erb"
 end
 
+directory node[:tungsten][:backupDir] do
+  owner node[:tungsten][:systemUser]
+  group node[:tungsten][:systemUser]
+  mode 0755
+  action :create
+  recursive true
+end
+
 remote_file "#{Chef::Config[:file_cache_path]}/#{node[:tungsten][:clusterSoftware]}" do
 	source "#{node[:tungsten][:clusterSoftwareSource]}#{node[:tungsten][:clusterSoftware]}"
 	owner node[:tungsten][:systemUser]
