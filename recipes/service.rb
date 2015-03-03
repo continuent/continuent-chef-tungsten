@@ -28,3 +28,8 @@ template '/etc/init.d/tungsten' do
 end
 
 execute 'chkconfig --add tungsten && chkconfig --level 2345 tungsten on'
+
+service 'tungsten' do
+  action :nothing
+  supports :status => true, :start => true, :stop => true, :restart => true
+end

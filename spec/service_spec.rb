@@ -27,4 +27,10 @@ describe 'tungsten::service' do
     expect(chef_run).to run_execute('chkconfig --add tungsten && chkconfig --level 2345 tungsten on')
   end
 
+  it 'should define a tungsten service resource' do
+    resource = chef_run.service('tungsten')
+    expect(resource).to do_nothing
+    expect(resource.supports).to eq({:status => true, :start => true, :stop => true, :restart => true})
+  end
+
 end
