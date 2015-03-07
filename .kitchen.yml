@@ -9,7 +9,19 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+    attributes:
+      tungsten:
+        prereqPackages:
+          - ruby
+          - wget
+          - rsync
   - name: ubuntu-14.04
+    attributes:
+      tungsten:
+        prereqPackages:
+          - ruby
+          - wget
+          - rsync
   - name: centos-6.5
     attributes:
       tungsten:
