@@ -3,14 +3,43 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
+  name: chef_solo
+  require_chef_omnibus: 12.1.0
+  chef_omnibus_install_options: -d /tmp/vagrant-cache/vagrant_omnibus
 
 platforms:
   - name: ubuntu-12.04
+  - name: ubuntu-14.04
   - name: centos-6.5
+    attributes:
+      tungsten:
+        prereqPackages:
+          - ruby
+          - wget
+          - rsync
 
 suites:
   - name: default
     run_list:
-      - recipe[tungsten::default]
+      - recipe[tungsten::server]
     attributes:
+      tungsten:
+        installMysqlServer: true
+        repUser: tungsten
+        repPassword: "test"
+        appUser: app_user
+        appPassword: "test"
+        mysqlAdminUser: root
+        mysqlAdminPassword: "test"
+      mysql:
+        server_debian_password: "test"
+        server_root_password: "test"
+        server_repl_password: "test"
+        master: true
+        client:
+          packages:
+            - "mysql55-devel"
+            - "mysql55-libs"
+        server:
+          packages:
+            - "mysql55-server"
