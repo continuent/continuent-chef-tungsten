@@ -16,6 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-Defaults:<%= node[:tungsten][:systemUser] -%> !requiretty
-Defaults:<%= node[:tungsten][:systemUser] -%> !visiblepw
-<%= node[:tungsten][:systemUser] -%> ALL=(ALL) NOPASSWD: ALL
+Defaults:<%= node['tungsten']['systemUser'] -%> !requiretty
+Defaults:<%= node['tungsten']['systemUser'] -%> !visiblepw
+<%= node['tungsten']['systemUser'] -%> ALL=(ALL) NOPASSWD: ALL

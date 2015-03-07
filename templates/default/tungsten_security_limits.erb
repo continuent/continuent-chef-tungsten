@@ -16,10 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-<%= node[:tungsten][:systemUser] -%>	soft	nofile	65535
-<%= node[:tungsten][:systemUser] -%>	hard	nofile	65535
-<%= node[:tungsten][:systemUser] -%>	soft	nproc	8096
-<%= node[:tungsten][:systemUser] -%>	hard	nproc	8096
+<%= node['tungsten']['systemUser'] -%>	soft	nofile	65535
+<%= node['tungsten']['systemUser'] -%>	hard	nofile	65535
+<%= node['tungsten']['systemUser'] -%>	soft	nproc	8096
+<%= node['tungsten']['systemUser'] -%>	hard	nproc	8096
 mysql	soft	nofile	65535
 mysql	hard	nofile	65535
 mysql	soft	nproc	8096
