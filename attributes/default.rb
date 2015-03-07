@@ -98,7 +98,7 @@ elsif node['platform'] =~ /(?i:debian|ubuntu)/
         default['tungsten']['mysqlServiceName']        = 'mysql'
         
         default['tungsten']['mysqlConfigDir']          = '/etc/mysql'
-        default['tungsten']['mysqlConfigFile']         = '#{default['tungsten']['mysqlConfigDir']}/my.cnf'
+        default['tungsten']['mysqlConfigFile']         = "#{default['tungsten']['mysqlConfigDir']}/my.cnf"
 
         default['tungsten']['mysqlDataDir']            = '/var/lib/mysql'
         default['tungsten']['mysqlPIDFile']            = '/var/run/mysqld/mysqld.pid'
