@@ -7,5 +7,5 @@ version           '1.2.0'
 
 depends 'selinux', '~> 0.8.0'
 depends 'apt'
-depends 'mysql'
+depends 'mysql', '~> 4.1.2'
 depends 'java'
