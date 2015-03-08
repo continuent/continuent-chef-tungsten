@@ -15,7 +15,7 @@ platforms:
     attributes:
       tungsten:
         prereqPackages:
-          - ruby
+          - ruby1.8-full
           - wget
           - rsync
   - name: ubuntu-14.04
@@ -36,10 +36,12 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[apt::default]
       - recipe[tungsten::server]
     attributes:
       tungsten:
         installMysqlServer: true
+        installJava: false
         repUser: tungsten
         repPassword: "test"
         appUser: app_user
