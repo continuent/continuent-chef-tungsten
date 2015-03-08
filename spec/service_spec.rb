@@ -2,7 +2,7 @@
 describe 'tungsten::service' do
 
   let(:chef_run) {
-    ChefSpec::SoloRunner.new do |node|
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '6.5') do |node|
       node.set['tungsten']['systemUser'] = 'bob'
       node.set['tungsten']['homeDir'] = '/home/bob'
     end.converge(described_recipe)
