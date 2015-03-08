@@ -1,6 +1,9 @@
 ---
 driver:
   name: vagrant
+  vagrantfiles:
+    - .Vagrantfile.cachier.rb
+    - .Vagrantfile.disable-berkshelf.rb
 
 provisioner:
   name: chef_solo
