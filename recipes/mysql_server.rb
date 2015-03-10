@@ -32,7 +32,7 @@ template node['tungsten']['mysqlConfigFile'] do
   owner "root"
   group "root"
   action :create
-  notifies 'service[mysql]', :restart
+  notifies :restart, 'service[mysql]'
 end
 
 group "mysql" do
