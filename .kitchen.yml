@@ -48,6 +48,7 @@ suites:
         appPassword: "test"
         mysqlAdminUser: root
         mysqlAdminPassword: "test"
+        serviceName: "somerandomservice"
       mysql:
         server_debian_password: "test"
         server_root_password: "test"
