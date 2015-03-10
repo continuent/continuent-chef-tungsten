@@ -16,6 +16,13 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License.
 #
+include_attribute 'mysql::server'
+include_attribute 'mysql::server_debian'
+include_attribute 'mysql::server_freebsd'
+include_attribute 'mysql::server_mac_os_x'
+include_attribute 'mysql::server_rhel'
+include_attribute 'mysql::server_suse'
+include_attribute 'mysql::server_windows'
 
 default['tungsten']['clusterSoftware'] = 'continuent-tungsten-2.0.5-3.noarch.rpm'
 default['tungsten']['clusterSoftwareSource'] = 'https://s3.amazonaws.com/releases.continuent.com/ct-2.0.4/'
@@ -28,8 +35,7 @@ default['tungsten']['prereqPackages'] = [
 	'ruby18-devel',
 	'wget',
 	'sudo',
-	'rsync',
-	'mysql'
+	'rsync'
 ]
 
 default['tungsten']['clusterSoftwareDir'] = default['tungsten']['clusterSoftware'].gsub( /\.noarch\.rpm/, '' )
@@ -61,6 +67,7 @@ default['tungsten']['appUser'] = 'app_user'
 default['tungsten']['appPassword'] = 'secret'
 
 default['tungsten']['repPort'] = '13306'
+default['mysql']['port'] = node['tungsten']['repPort']
 default['tungsten']['repUser'] = 'tungsten'
 default['tungsten']['repPassword'] = 'secret'
 
@@ -69,8 +76,8 @@ default['tungsten']['master'] = 'db1'
 default['tungsten']['members'] = 'db1'
 default['tungsten']['connectors'] = 'db1'
 
-default['tungsten']['mysqlAdminUser'] = 'root'
-default['tungsten']['mysqlAdminPassword'] = 'secret'
+default['tungsten']['mysqlAdminUser'] = node['mysql']['server_root_user']
+default['tungsten']['mysqlAdminPassword'] = node['mysql']['server_root_password']
 
 default['tungsten']['rootHome'] = File.expand_path('~root')
 
@@ -81,34 +88,14 @@ default['tungsten']['mysqlBinlogFormat'] = 'ROW'
 default['tungsten']['mysqlIncrement'] = 10
 default['tungsten']['mysqlOffset'] = 1
 
-if node['platform'] =~ /(?i:centos|redhat|oel|amazon)/
-        default['tungsten']['mysqlServiceName']        = 'mysqld'
+default['tungsten']['mysqlServiceName']      = node['mysql']['server']['service_name']
 
-        default['tungsten']['mysqlConfigDir']          = '/etc'
-        default['tungsten']['mysqlConfigFile']         = "#{default['tungsten']['mysqlConfigDir']}/my.cnf"
+default['tungsten']['mysqlConfigDir']        = node['mysql']['server']['directories']['confd_dir']
+default['tungsten']['mysqlConfigFile']       = "#{default['tungsten']['mysqlConfigDir']}/tungsten.cnf"
 
-        default['tungsten']['mysqlDataDir']            = '/var/lib/mysql'
-        default['tungsten']['mysqlPIDFile']            = '/var/lib/mysql/mysqld.pid'
-        default['tungsten']['mysqlSocket']             = '/var/lib/mysql/mysql.sock'
-
-        #default['tungsten']['serverPackageName']      = 'Percona-Server-server-55'
-        #default['tungsten']['clientPackageName']      = 'Percona-Server-client-55'
-
-elsif node['platform'] =~ /(?i:debian|ubuntu)/
-        default['tungsten']['mysqlServiceName']        = 'mysql'
-        
-        default['tungsten']['mysqlConfigDir']          = '/etc/mysql'
-        default['tungsten']['mysqlConfigFile']         = "#{default['tungsten']['mysqlConfigDir']}/my.cnf"
-
-        default['tungsten']['mysqlDataDir']            = '/var/lib/mysql'
-        default['tungsten']['mysqlPIDFile']            = '/var/run/mysqld/mysqld.pid'
-        default['tungsten']['mysqlSocket']             = '/var/run/mysqld/mysqld.sock'
-
-        #default['tungsten']['serverPackageName']      = 'Percona-Server-server-5.5'
-        #default['tungsten']['clientPackageName']      = 'Percona-Server-client-5.5'
-else
-	default['tungsten']['installMysqlServer'] = false
-end
+default['tungsten']['mysqlDataDir']          = node['mysql']['data_dir']
+default['tungsten']['mysqlPIDFile']          = node['mysql']['server']['pid_file']
+default['tungsten']['mysqlSocket']           = node['mysql']['server']['socket']
 
 default['tungsten']['sshPublicKey_custom'] = nil
 default['tungsten']['sshPublicKey'] = 'AAAAB3NzaC1yc2EAAAABIwAAAQEAo3LUB/ZA1VCzHKqcZ/bFS0Hh1QyRASYblsRbxAhLlu4mWKsnzOPlbcgCs2mvEcP6K1OFd6VRm5PhjDgclzeQOTl582Ugnzt9Kz6FU9ea5tzkCob+5nEAJnvpbHmm7ZRsQzc5UYq9O5EonQCno7BXHuUcBkb9ZoVXl1oiuaJmDEKM2ynFwoItd0kpclcRQg9LcE3gSOWfwXRxxYrsccLERih3rqYU6PnyQH6cqdU2VgJeVmaRSfK82cEsRTBrUc17hbI5Nii3JiVr33TYXssYxVDkB8TSe3zaEkVvJoKbdWbhRVa4BWDupk3xAyEPaXAOt3eE0pjMpw2KjpBIl8H/Fw=='
@@ -147,3 +134,7 @@ if node['platform'] == 'amazon'
 else
 	default['tungsten']['installNTP']	= true
 end
+
+include_attribute 'java'
+default['java']['install_flavour'] = 'openjdk'
+default['java']['jdk_version'] = '7'

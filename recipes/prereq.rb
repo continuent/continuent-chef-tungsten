@@ -45,14 +45,7 @@ node['tungsten']['prereqPackages'].each do |pkg|
 end
 
 if node['tungsten']['installJava'] == true
-	package "java" do
-		action :install
-		not_if { node['platform'] == "amazon" }
-	end
-	package "java-1.7.0-openjdk" do
-		action :install
-		only_if { node['platform'] == "amazon" }
-	end
+  include_recipe "java"
 end
 
 group node['tungsten']['systemUser'] do
@@ -163,9 +156,4 @@ if node['tungsten']['installSSHKeys'] == true
 		only_if { File.directory?("/home/#{node['tungsten']['systemUser']}/.ssh") }
 	end
 
-end
-
-# Define here so we can use it in any recipe we like
-service "mysqld" do
-  action :nothing
 end

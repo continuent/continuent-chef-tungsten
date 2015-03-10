@@ -16,22 +16,10 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License.
 #
-unless node['platform'] =~ /(?i:centos|redhat|oel|amazon|debian|ubuntu)/
-	fail "The mysql_server recipe is not supported on an #{node['platform']}-based system."
-end
 
-package "mysql-server" do
-	action :install
-end
+include_recipe "mysql::server"
 
-directory "/etc/mysql" do
-  owner "root"
-  group "root"
-  mode 00755
-  action :create
-end
-
-directory "/etc/mysql/conf.d" do
+directory node['tungsten']['mysqlConfigDir'] do
   owner "root"
   group "root"
   mode 00755
@@ -44,25 +32,11 @@ template node['tungsten']['mysqlConfigFile'] do
   owner "root"
   group "root"
   action :create
-end
-
-service_name = 'mysqld'
-if node.platform_family?('debian') then
-  service_name = 'mysql'
-end
-
-service "mysqld" do
-  service_name service_name
-  action :start
+  notifies :restart, 'service[mysql]'
 end
 
 group "mysql" do
 	action :manage
 	append true
 	members node['tungsten']['systemUser']
-end
-
-execute "tungsten_set_mysql_admin_password" do
-  command "mysqladmin -u#{node['tungsten']['mysqlAdminUser']} password #{node['tungsten']['mysqlAdminPassword']}"
-  only_if	{ "/usr/bin/test -f /usr/bin/mysql" && "/usr/bin/mysql -u {node['tungsten']['mysqlAdminUser']}" }
 end
