@@ -49,6 +49,9 @@ suites:
         mysqlAdminUser: root
         mysqlAdminPassword: "test"
         serviceName: "somerandomservice"
+        master: "foo"
+        members: "foo,foo2,foo3"
+        connectors: "bar1,bar2,bar3"
       mysql:
         server_debian_password: "test"
         server_root_password: "test"
