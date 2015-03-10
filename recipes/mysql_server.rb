@@ -16,8 +16,8 @@
 # See the License for the specific language governing permissions and 
 # limitations under the License.
 #
-unless node[:platform] =~ /(?i:centos|redhat|oel|amazon|debian|ubuntu)/
-	fail "The mysql_server recipe is not supported on an #{node[:platform]}-based system."
+unless node['platform'] =~ /(?i:centos|redhat|oel|amazon|debian|ubuntu)/
+	fail "The mysql_server recipe is not supported on an #{node['platform']}-based system."
 end
 
 package "mysql-server" do
@@ -38,7 +38,7 @@ directory "/etc/mysql/conf.d" do
   action :create
 end
 
-template node[:tungsten][:mysqlConfigFile] do
+template node['tungsten']['mysqlConfigFile'] do
   mode 00644
   source "tungsten_my_cnf.erb"
   owner "root"
@@ -53,10 +53,10 @@ end
 group "mysql" do
 	action :manage
 	append true
-	members node[:tungsten][:systemUser]
+	members node['tungsten']['systemUser']
 end
 
 execute "tungsten_set_mysql_admin_password" do
-  command "mysqladmin -u#{node[:tungsten][:mysqlAdminUser]} password #{node[:tungsten][:mysqlAdminPassword]}"
-  only_if	{ "/usr/bin/test -f /usr/bin/mysql" && "/usr/bin/mysql -u {node[:tungsten][:mysqlAdminUser]}" }
+  command "mysqladmin -u#{node['tungsten']['mysqlAdminUser']} password #{node['tungsten']['mysqlAdminPassword']}"
+  only_if	{ "/usr/bin/test -f /usr/bin/mysql" && "/usr/bin/mysql -u {node['tungsten']['mysqlAdminUser']}" }
 end

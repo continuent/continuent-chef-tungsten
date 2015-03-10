@@ -19,6 +19,6 @@
 
 [client]
 host=localhost
-user='<%= node[:tungsten][:mysqlAdminUser] -%>'
-password='<%= node[:tungsten][:mysqlAdminPassword] -%>'
-port=<%= node[:tungsten][:repPort] -%>
+user='<%= node['tungsten']['mysqlAdminUser'] -%>'
+password='<%= node['tungsten']['mysqlAdminPassword'] -%>'
+port=<%= node['tungsten']['repPort'] -%>
