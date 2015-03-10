@@ -10,8 +10,8 @@ group :chef_development do
   gem 'guard-rspec', '~> 4.5.0'
 
   gem 'chefspec'
-  gem 'test-kitchen', '~> 1.3.0'
-  gem 'kitchen-vagrant'
+  gem 'test-kitchen', '~> 1.3.1'
+  gem 'kitchen-vagrant', :git => 'git://github.com/test-kitchen/kitchen-vagrant.git', :ref => '9f9b502fb7bcb461e8f805e01c2e87abc3077654'
   gem 'foodcritic'
 
   # Windows notifications
