@@ -19,7 +19,7 @@
 
 default['tungsten']['clusterSoftware'] = 'continuent-tungsten-2.0.5-3.noarch.rpm'
 default['tungsten']['clusterSoftwareSource'] = 'https://s3.amazonaws.com/releases.continuent.com/ct-2.0.4/'
-default['tungsten']['clusterSoftwareChecksum'] = 'b8ea78762f66a9c9b8ca7e884ae310083981f1fb'
+default['tungsten']['clusterSoftwareChecksum'] = '0cc17eb545c110be3045005c91e136e3205c6e75930bf54195348a69e96f4379'
 
 default['tungsten']['prereqPackages'] = [
 	'ruby18',

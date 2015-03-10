@@ -46,8 +46,14 @@ template node['tungsten']['mysqlConfigFile'] do
   action :create
 end
 
+service_name = 'mysqld'
+if node.platform_family?('debian') then
+  service_name = 'mysql'
+end
+
 service "mysqld" do
-	action :start
+  service_name service_name
+  action :start
 end
 
 group "mysql" do
