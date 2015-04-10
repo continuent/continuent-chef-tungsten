@@ -90,6 +90,8 @@ default['tungsten']['mysqlOffset'] = 1
 
 default['tungsten']['mysqlServiceName']      = node['mysql']['server']['service_name']
 
+default['tungsten']['backupRetention'] = 3
+
 default['tungsten']['mysqlConfigDir']        = node['mysql']['server']['directories']['confd_dir']
 default['tungsten']['mysqlConfigFile']       = "#{default['tungsten']['mysqlConfigDir']}/tungsten.cnf"
 
